@@ -1,0 +1,26 @@
+services:
+  text-generation-webui:
+    image: text-generation-webui-nvidia-tensorrt-llm
+    container_name: text-generation-webui-nvidia-tensorrt-llm
+    environment:
+      - EXTRA_LAUNCH_ARGS="--listen --verbose --api"
+    ports:
+      - 7860:7860
+      - 5000:5000
+      - 5005:5005
+    volumes:
+      - ./cache:/root/.cache
+      - ./text-generation-webui:/app
+    logging:
+      driver:  json-file
+      options:
+        max-file: "3"
+        max-size: "10M"
+
+    deploy:
+        resources:
+          reservations:
+            devices:
+              - driver: nvidia
+                device_ids: ['0']
+                capabilities: [gpu]
