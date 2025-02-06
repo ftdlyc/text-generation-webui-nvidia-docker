@@ -1,7 +1,7 @@
 services:
   text-generation-webui:
-    image: text-generation-webui-nvidia-tensorrt-llm
-    container_name: text-generation-webui-nvidia-tensorrt-llm
+    image: text-generation-webui-nvidia-cuda
+    container_name: text-generation-webui-nvidia-cuda
     environment:
       - EXTRA_LAUNCH_ARGS="--listen --verbose --api"
     ports:

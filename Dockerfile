@@ -2,7 +2,7 @@
 ### BUILD IMAGES ###
 ####################
 
-FROM pytorch/pytorch:2.2.2-cuda12.1-cudnn8-devel
+FROM pytorch/pytorch:2.4.1-cuda12.1-cudnn9-devel
 
 # Pre-reqs
 RUN apt-get update && apt-get install --no-install-recommends -y \
@@ -20,9 +20,9 @@ COPY ./text-generation-webui/extensions /src/extensions
 COPY ./text-generation-webui/requirements.txt /src/requirements.txt
 
 # Install TensorRT-LLM
-RUN apt install -y openmpi-bin libopenmpi-dev
-ENV LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
-RUN pip3 install tensorrt_llm==0.10.0 -U --pre --extra-index-url https://pypi.nvidia.com
+#RUN apt install -y openmpi-bin libopenmpi-dev
+#ENV LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
+#RUN pip3 install tensorrt_llm==0.10.0 -U --pre --extra-index-url https://pypi.nvidia.com
 
 # Install oobabooga/text-generation-webui
 RUN pip3 install -r /src/requirements.txt
@@ -45,7 +45,8 @@ EXPOSE 5005
 ENV PYTHONUNBUFFERED=1
 
 # Variant parameters
-RUN echo "Nvidia Extended (TensorRT-LLM)" > /variant.txt
+#RUN echo "Nvidia Extended (TensorRT-LLM)" > /variant.txt
+RUN echo "Nvidia Cuda" > /variant.txt
 ENV EXTRA_LAUNCH_ARGS=""
 CMD ["python3", "/app/server.py"]
 

@@ -10,7 +10,7 @@ git clone https://github.com/ftdlyc/text-generation-webui-nvidia-docker.git --re
 2. build docker image
 ```
 cd text-generation-webui-nvidia-docker
-docker build -t text-generation-webui-nvidia-tensorrt-llm .
+docker build -t text-generation-webui-nvidia-cuda .
 ```
 3. run docker container
 ```
